@@ -14,9 +14,9 @@ function update_git_branch_variables() {
         GIT_STASHED=1
     fi
 
-    GIT_NO_UPSTREAM=0
-    if $(git name-rev @{u} 2>/dev/null); then
-        GIT_NO_UPSTREAM=1
+    GIT_NO_UPSTREAM=1
+    if $(git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null); then
+        GIT_NO_UPSTREAM=0
     fi
 }
 
@@ -58,7 +58,7 @@ function compose_git_prompt_string() {
 
     GIT_PROMPT="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
 
-    if [ "$GIT_NO_UPSTREAM" -ne "0" ]; then
+    if [ "$GIT_NO_UPSTREAM" -eq "1" ]; then
         GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_NO_UPSTREAM%{${reset_color}%}"
     fi
     if [ "$GIT_AHEAD" -ne "0" ]; then
@@ -125,7 +125,7 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}%{-%G%}"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[yellow]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{!%G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
 
 # Set the prompt.
 RPROMPT='$(git_prompt_enhanced_status)'
