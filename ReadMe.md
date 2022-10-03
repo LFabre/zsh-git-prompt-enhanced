@@ -6,10 +6,40 @@ The Enhanced Git Prompt can show information about the current branch/hash name,
 
 The prompt also provides information about the changes on the repository. It will show the amount of files modified, deleted, conflicted, staged and untracked.
 
+## Enhanced Prompt
+
+### Branch Tracking Symbols
+
+| Symbol | Color  | Meaning                            |
+|--------|--------|------------------------------------|
+| ✗      | red    | current branch has no upstream     |
+| ↑n     | cyan   | ahead of upstream by `n` commits   |
+| ↓n     | yellow | behind of upstream by `n` commits  |
+| ⚑      | yellow   | there stash entries              |
+
+### Repository Status Symbols
+
+| Symbol | Color  | Meaning                        |
+|--------|--------|--------------------------------|
+| +n     | blue   | there are `n` modified files   |
+| -n     | red    | there are `n` deleted files    |
+| ●n     | yellow | there are `n` staged files     |
+| ●n     | cyan   | there are `n` untracked files  |
+| !n     | red    | there are `n` conflicted files |
+| ✔      | blue   | repository clean               |
+
+### Examples
+
+Add Examples
+
 ## Installation
 
 Add Section
 
 ## Customization
+
+Add Section
+
+## Motivation
 
 Add Section
