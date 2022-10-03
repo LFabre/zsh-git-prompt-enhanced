@@ -1,13 +1,13 @@
-# Handle $0 according to Zsg standards
+# Zsh standards for handling $0
 # https://zdharma-continuum.github.io/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
 ## Functions to update Git Variables
 function update_git_branch_variables() {
-    GIT_BRANCH="${$(git_current_branch):="$(git_prompt_short_sha)"}"
-    GIT_BEHIND=$(git_commits_behind)
-    GIT_AHEAD=$(git_commits_ahead)
+    GIT_BRANCH="${$(git branch --show-current):-"$(git rev-parse --short HEAD)"}"
+    GIT_AHEAD=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
+    GIT_BEHIND=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
 
     GIT_STASHED=0
     if $(git rev-parse --verify refs/stash &>/dev/null); then
