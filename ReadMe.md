@@ -15,7 +15,7 @@ The prompt also provides information about the status of the repository. It will
 | ✗      | red    | current branch has no upstream     |
 | ↑n     | cyan   | ahead of upstream by `n` commits   |
 | ↓n     | yellow | behind of upstream by `n` commits  |
-| ⚑      | yellow | there is a stash entry           |
+| ⚑      | yellow | there is a stash entry             |
 
 ### Repository Status Symbols
 
@@ -26,7 +26,7 @@ The prompt also provides information about the status of the repository. It will
 | ●n     | yellow | there are `n` staged files     |
 | ●n     | cyan   | there are `n` untracked files  |
 | !n     | red    | there are `n` conflicted files |
-| ✔      | green  | repository clean               |
+| ✔      | green  | repository is clean            |
 
 ### Examples
 
@@ -34,7 +34,10 @@ Add Examples
 
 ## Installation
 
-Add Section
+1. Create a new folder called `git-prompt-enhanced` inside `~/.oh-my-zsh/custom/plugins`
+2. Copy the `git-prompt-enhanced.plugin.zsh` script to this new folder
+3. Add the plugin `git-prompt-enhanced` to your `plugins` variable on your `.zshrc` file
+    * `plugins=( ... git-prompt-enhanced )`
 
 ## Customization
 
