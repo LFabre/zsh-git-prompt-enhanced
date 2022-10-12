@@ -1,9 +1,8 @@
-# Zsh standards for handling $0
+# Handle $0 according to the standard:
 # https://zdharma-continuum.github.io/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-## Functions to update Git Variables
 function update_git_branch_variables() {
     GIT_BRANCH="${$(git branch --show-current):-"$(git rev-parse --short HEAD)"}"
     GIT_AHEAD=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
@@ -48,44 +47,39 @@ function update_git_status_varaibles() {
     done <<< "$GIT_STATUS"
 }
 
-function update_git_variables() {
-    update_git_status_varaibles
-    update_git_branch_variables
-}
-
 function compose_git_prompt_string() {
-    STATUS_SEPARATOR=$ZSH_THEME_GIT_PROMPT_STATUS_SEPARATOR
+    SEPARATOR=$ZSH_THEME_GIT_PROMPT_STATUS_SEPARATOR
 
     GIT_PROMPT="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
 
     if [ "$GIT_NO_UPSTREAM" -eq "1" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_NO_UPSTREAM%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_NO_UPSTREAM%{${reset_color}%}"
     fi
     if [ "$GIT_AHEAD" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{${reset_color}%}"
     fi
     if [ "$GIT_BEHIND" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
     fi
     if [ "$GIT_STASHED" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_STASHED%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_STASHED%{${reset_color}%}"
     fi
 
     GIT_PROMPT+="$ZSH_THEME_GIT_PROMPT_SEPARATOR"
     if [ "$GIT_MODIFIED" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_MODIFIED$GIT_MODIFIED%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_MODIFIED$GIT_MODIFIED%{${reset_color}%}"
     fi
     if [ "$GIT_DELETED" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_DELETED$GIT_DELETED%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_DELETED$GIT_DELETED%{${reset_color}%}"
     fi
     if [ "$GIT_STAGED" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
     fi
     if [ "$GIT_UNTRACKED" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED%{${reset_color}%}"
     fi
     if [ "$GIT_CONFLICTS" -ne "0" ]; then
-        GIT_PROMPT+="$STATUS_SEPARATOR$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+        GIT_PROMPT+="$SEPARATOR$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
     fi
 
     if [ "$GIT_MODIFIED" -eq "0" ] \
@@ -103,7 +97,8 @@ function compose_git_prompt_string() {
 
 function git_prompt_enhanced_status() {
     if git rev-parse --git-dir &> /dev/null; then
-        update_git_variables
+        update_git_branch_variables
+        update_git_status_varaibles
         compose_git_prompt_string
     fi
 }
