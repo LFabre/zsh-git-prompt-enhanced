@@ -24,13 +24,13 @@ The prompt can also provide information about the status of a repository. It wil
 | +n     | blue   | there are `n` modified files   |
 | -n     | red    | there are `n` deleted files    |
 | ●n     | yellow | there are `n` staged files     |
-| Un     | cyan   | there are `n` untracked files  |
+| ●n     | cyan   | there are `n` untracked files  |
 | !n     | red    | there are `n` conflicted files |
 | ✔      | green  | repository is clean            |
 
 ### Examples
 
-This first example displays a repository current on `develop` branch with 4 modified files, 3 deleted files, 2 staged and one untracked change.
+This first example displays a repository current on `develop` branch with 4 modified, 3 deleted, 2 staged files and one untracked change.
 
 ![Example01](./imgs/example01.png)
 
