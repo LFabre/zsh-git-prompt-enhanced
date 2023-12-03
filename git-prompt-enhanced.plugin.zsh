@@ -120,7 +120,7 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}%{-%G%}"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[yellow]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{!%G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✓%G%}"
 
 # Set the prompt.
 RPROMPT='$(git_prompt_enhanced_status)'
